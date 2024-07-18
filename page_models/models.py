@@ -10,9 +10,13 @@ class EbayPage:
         self.page = page
 
     def navigate_to(self):
+        """Navigate to the pages' URL."""
+
         self.page.goto(self.url)
 
     def validate_page_finished_loading(self):
+        """Validate that the page finished loading."""
+
         self.page.wait_for_load_state()
 
 
@@ -34,7 +38,10 @@ class EbayHome(EbayPage):
         expect(self.page.locator(self.locators['search_bar'])).to_be_visible()
 
     def search_for_laptop(self, search_term: str):
-        """Input the search term in the search bar and click search."""
+        """Input the search term in the search bar and click search.
+
+        :param search_term: The search term to input in the search bar.
+        """
 
         self.page.locator(self.locators['search_bar']).fill(search_term)
         self.page.locator(self.locators['search_button']).click()
@@ -44,10 +51,13 @@ class EbayHome(EbayPage):
 
         expect(self.page.locator(self.locators['search_results_list'])).to_be_visible()
 
-    def assert_results_count(self, n: int):
-        """Validate at least n search results"""
+    def assert_results_count(self, minimum_results: int):
+        """Validate at least 'minimum_results' search results.
 
-        assert self.page.locator(self.locators['search_results_list_items']).count() >= n
+        :param minimum_results: The minimum number of search results to validate.
+        """
+
+        assert self.page.locator(self.locators['search_results_list_items']).count() >= minimum_results
 
     def validate_search_results_contain_search_term(self,
                                                     search_term: str,
