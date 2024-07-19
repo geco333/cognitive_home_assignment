@@ -35,5 +35,5 @@ def test_ebay():
         logging.info("Validating minimum search results count ...")
         ebay_home.assert_results_count(minimum_results)
 
-        logging.info("Validating at least 10 search results contain the word: 'laptop' ...")
+        logging.info(f"Validating at least {minimum_results} search results contain the word: 'laptop' ...")
         ebay_home.validate_search_results_contain_search_term(search_term, minimum_results)
