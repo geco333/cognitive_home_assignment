@@ -38,7 +38,7 @@ class EbayHome(EbayPage):
 
         expect(self.page.locator(self.locators['search_bar'])).to_be_visible()
 
-    def search_for_laptop(self, search_term: str):
+    def search_for_search_term(self, search_term: str):
         """Input the search term in the search bar and click search.
 
         :param search_term: The search term to input in the search bar.

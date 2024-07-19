@@ -6,6 +6,18 @@ from page_models.models import EbayHome
 
 
 def test_ebay(search_term: str, minimum_results: int):
+    """Test steps:
+    1. Open a new Chrome browser and navigate to Ebay.com
+    2. Validate that the page finished loading successfully.
+    3. Assert that the search bar is visible.
+    4. Input the provided <search_term> into the search bar and click the search button.
+    5. Validate that the search returned results.
+    6. Validate that at least <minimum_results> results returned.
+    7. Validate that the search returned at least <minimum_results> results containing the <search_term>"""
+
+    logging.debug(f"search_term: {search_term}")
+    logging.debug(f"minimum_results: {minimum_results}")
+
     with sync_playwright() as playwright:
         chromium = playwright.chromium
         browser = chromium.launch(headless=False)
@@ -23,7 +35,7 @@ def test_ebay(search_term: str, minimum_results: int):
         ebay_home.assert_search_bar_visible()
 
         logging.info(f"Searching for {search_term} ...")
-        ebay_home.search_for_laptop(search_term)
+        ebay_home.search_for_search_term(search_term)
 
         logging.info("Validating search results visible ...")
         ebay_home.validate_search_results_visible()
