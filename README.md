@@ -2,12 +2,17 @@
 
 ## Installation
 
-In order to install all dependencies run the following command:
+In order to install all dependencies run the following commands:
 
-```pip install -r requirenments.txt```
+```
+pip install -r requirenments.txt
+playwright install
+``` 
 
-## Usage
+## Run test
 
 In order to run the test run the following command:
 
-``pytest tests/main.py``
+``
+pytest tests/main.py
+``
