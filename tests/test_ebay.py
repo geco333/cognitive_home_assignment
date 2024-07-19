@@ -5,10 +5,7 @@ from playwright.sync_api import sync_playwright
 from page_models.models import EbayHome
 
 
-def test_ebay():
-    search_term = "laptop"
-    minimum_results = 10
-
+def test_ebay(search_term: str, minimum_results: int):
     with sync_playwright() as playwright:
         chromium = playwright.chromium
         browser = chromium.launch(headless=False)
