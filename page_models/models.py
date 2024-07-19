@@ -74,7 +74,7 @@ class EbayHome(EbayPage):
 
         for search_result in search_results[2:]:
             if re.search(search_term.lower(), search_result.text_content().lower()):
-                logging.info(f"Found '{search_term}' in item description: {search_result.text_content()}")
+                logging.debug(f"Found '{search_term}' in item description: {search_result.text_content()}")
                 counter += 1
             else:
                 logging.warning(f"Did not find '{search_term}' in item description: {search_result.text_content()}")

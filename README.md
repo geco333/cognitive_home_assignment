@@ -18,5 +18,5 @@ playwright install
 In order to run the test run the following command:
 
 ``
-pytest tests/main.py
+pytest tests/test_ebay.py
 ``
