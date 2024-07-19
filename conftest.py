@@ -22,7 +22,6 @@ root_logger.addHandler(file_handler)
 
 
 def pytest_addoption(parser):
-    parser.addoption("--help", action="store")
     parser.addoption("--search-term", action="store")
     parser.addoption("--minimum-results", action="store")
 
