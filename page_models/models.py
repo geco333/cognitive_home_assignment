@@ -1,3 +1,4 @@
+import logging
 import re
 
 from playwright.sync_api import Page, expect
@@ -72,10 +73,13 @@ class EbayHome(EbayPage):
         counter = 0
 
         for search_result in search_results[2:]:
-            if re.search(search_term, search_result.text_content()):
+            if re.search(search_term.lower(), search_result.text_content().lower()):
+                logging.info(f"Found '{search_term}' in item description: {search_result.text_content()}")
                 counter += 1
+            else:
+                logging.warning(f"Did not find '{search_term}' in item description: {search_result.text_content()}")
 
             if counter >= minimum_results:
                 return
 
-        raise AssertionError(f"found less then {minimum_results} search results containing 'laptop'")
+        raise AssertionError(f"found less then {minimum_results} search results containing: '{search_term}'")

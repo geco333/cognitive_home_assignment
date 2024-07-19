@@ -1,8 +1,12 @@
 import logging
+import uuid
 
 from playwright.sync_api import sync_playwright
 
 from page_models.models import EbayHome
+
+logging.basicConfig(filename=f"{uuid.uuid4()}.log",
+                    filemode="w")
 
 
 def test_ebay():
