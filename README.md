@@ -42,6 +42,13 @@ pytest tests/test_ebay.py --search-term <search_term> --minimum-results <minimum
 
 ## Logging
 
-For each test run a new log file will be created in the ***log/*** folder.
+For each test run a new folder containing the ***debug.log*** and the HTML report file will be created in ***log/***  
 
-A random UUID4 will be generated for each test run to be used as the log file name, for example: **3360301d-789d-456c-9bb3-a5438a86db5e.log**
+The test run logging folder is named randomly using a UUID4 hash.
+
+> For example, for test run 43086d5e-6b6d-45f5-9777-626d7af8a47c the logging files
+> will be:
+>  
+> log/43086d5e-6b6d-45f5-9777-626d7af8a47c/debug.log
+> 
+> log/43086d5e-6b6d-45f5-9777-626d7af8a47c/report.html
