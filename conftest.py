@@ -4,21 +4,33 @@ import pathlib
 import uuid
 
 import pytest
+from _pytest.config import Config
+from pytest_html.report_data import ReportData
 
 # Setup logging to a local file named using a random uuid4 hash.
 root_logger = logging.getLogger()
+report_uuid = uuid.uuid4().__str__()
 
 log_folder = pathlib.Path(f"{pathlib.Path(__file__).parent}/log")
+report_folder = pathlib.Path(f"{log_folder}/{report_uuid}")
 
 if not log_folder.exists():
     os.mkdir(log_folder)
 
-file_handler = logging.FileHandler(f"{log_folder}/{uuid.uuid4()}.log", encoding="utf-8")
+if not report_folder.exists():
+    os.mkdir(report_folder)
+
+file_handler = logging.FileHandler(f"{report_folder}/debug.log", encoding="utf-8")
 file_handler_formatter = logging.Formatter("[%(asctime)s%(msecs)d][%(levelname)s] %(message)s")
 file_handler_formatter.default_msec_format = '%s.%03d'
 file_handler.setFormatter(file_handler_formatter)
 
 root_logger.addHandler(file_handler)
+
+
+def pytest_configure(config: Config):
+    config.option.htmlpath = f"{report_folder}/report.html"
+    config.option.self_contained_html = True
 
 
 def pytest_addoption(parser):
@@ -51,3 +63,7 @@ def minimum_results(request) -> int:
         return 10
 
     return int(minimum_results)
+
+
+def pytest_html_report_title(report: ReportData):
+    report.title = report_uuid
